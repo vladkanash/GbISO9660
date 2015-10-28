@@ -5,7 +5,8 @@ http://github.com/GUIDOBOT/
 
 Released 22/01/14
 
-#GBISO9660 allows you to manipulate ISO files. Main functions are 
+#GBISO9660 allows you to manipulate ISO files. 
+Main functions are 
 
 	- Know if a file exists
 	- Extract specific file
