@@ -12,7 +12,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    //List of input folders/files
     ISOWriter writer(argv, argc-1);
+
+    //Name of the output .iso file
     writer.write_iso(argv[argc-1]);
     return 0;
 }

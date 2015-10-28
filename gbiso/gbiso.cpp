@@ -39,7 +39,7 @@ int gbIso9660 :: load_directory_record(u32 path_entry_location, vector<tree_entr
 {
 	directory_record dr;
 	u8 * name = NULL;
-	u32 restore = ftell(stream);
+	u32 restore = (u32)ftell(stream);
 	int flag = 0;
 	unsigned bytes_read = 0;
 
@@ -225,7 +225,7 @@ tree_entry * gbIso9660 :: get_file_info_recursive(const char * path, vector<tree
 	int type = ENTRY_DIRECTORY;
 
 	//Get the directory name length
-	char * file_name_end = strchr(path, '/');
+	const char* file_name_end = strchr(path, '/');
 
 	//If not, get the filename length
 	if(!file_name_end)
@@ -268,7 +268,7 @@ int gbIso9660 :: extract_all(const char * extract_path)
 	if(tree)
 	{
 		//Create the main path
-		if(mkdir(extract_path) <= 0)
+		if(mkdir(extract_path, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) <= 0)
 			return extract_recursive(extract_path, tree);
 		else
 			return ERROR_CANT_CREATE;
@@ -296,7 +296,7 @@ int gbIso9660 :: extract_recursive(const char * extract_path, vector<tree_entry>
 		if((*te)[i].childs)
 		{
 			//Its a folder
-			mkdir(create);
+			mkdir(create, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 			ret = extract_recursive(create, (*te)[i].childs);
 		}
 		else //Its a file
@@ -450,3 +450,8 @@ void gbIso9660 :: fix_string(char * str)
 
 	* store = '\0';
 };
+
+int gbIso9660::create_file()
+{
+    return OK;
+}
