@@ -7,18 +7,12 @@
 	
 **/
 
-#ifndef GBISO_GBISO
-#define GBISO_GBISO
-
 #include "types.h"
 #include <stdio.h>
 #include <string.h>
 #include <vector>
-
-#define _POSIX_SOURCE
 #include <sys/stat.h>
 #include <unistd.h>
-#undef _POSIX_SOURCE
 
 #define DEBUG
 
@@ -85,6 +79,6 @@ class gbIso9660
 	primary_volume_descriptor pvd;
 	FILE * stream;
 	vector<tree_entry> * tree;
-};
 
-#endif
+	int create_file();
+};
